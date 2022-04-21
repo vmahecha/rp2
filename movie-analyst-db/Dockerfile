@@ -4,4 +4,5 @@ WORKDIR /movie-analyst-db
 COPY . .
 RUN yarn install --production
 
+EXPOSE 3000
 CMD ["node", "/movie-analyst-db/seeds.js"]

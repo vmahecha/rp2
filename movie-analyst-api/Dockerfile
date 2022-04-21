@@ -4,4 +4,5 @@ WORKDIR /movie-analyst-api
 COPY . .
 RUN yarn install --production
 
+EXPOSE 3000
 CMD ["node", "/movie-analyst-api/server.js"]
