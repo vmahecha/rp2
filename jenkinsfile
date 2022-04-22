@@ -1,5 +1,11 @@
 pipeline {
     agent any 
+    environment {
+        BUILD_NUMBER = 'LATEST'
+        registry = "vmahecha07/nodefront"
+        registryCredential = 'docker'
+        dockerImage = ''
+    }
     stages {
         stage('clone') {
             steps {
@@ -7,6 +13,25 @@ pipeline {
                 sh 'rm -fr rp2'
                 git branch: 'develop', url: 'https://github.com/vmahecha/rp2.git'
                 sh 'pwd'
+            }
+        stage('build'){
+            steps {
+                sh 'cd /var/lib/jenkins/workspace/cipipeline'
+                sh 'cd movie-analyst-ui'
+                dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                sh 'docker images'
+            }
+        }
+        stage('push'){
+            steps{
+                 withDockerRegistry([ credentialsId: "docker" ]) {                
+                      dockerImage.push()
+                  }
+            }
+        }
+        stage('Cleaning up') {
+            steps{
+                sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
