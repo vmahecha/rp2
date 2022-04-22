@@ -3,6 +3,7 @@ pipeline {
     environment {
         BUILD_NUMBER = 'LATEST'
         registry = 'vmahecha07/nodefront'
+        registry2 = 'vmahecha07/nodeapp'
         registryCredential = 'docker'
         dockerImage = ''
     }
@@ -23,7 +24,13 @@ pipeline {
                  docker build -t $registry:$BUILD_NUMBER .
                  docker images
                 '''
-                sh'pwd'
+                sh'''
+                 cd movie-analyst-api
+                 pwd
+                 docker build -t $registry2:$BUILD_NUMBER .
+                 docker images
+                '''
+                sh 'docker images'
             }
         }
     }
