@@ -20,7 +20,6 @@ pipeline {
             steps {
                 sh'./front.sh'
                 sh'./back.sh'
-                sh 'docker images'
             }
         }
         stage('push'){
