@@ -4,7 +4,7 @@ pipeline {
         BUILD_NUMBER = 'LATEST'
         registry = 'vmahecha07/nodefront'
         registry2 = 'vmahecha07/nodeapp'
-        registryCredential = 'docker'
+        registryCredential = 'vmahecha07'
         dockerImage = ''
     }
     stages {
