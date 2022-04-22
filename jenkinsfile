@@ -35,10 +35,10 @@ pipeline {
         }
         stage('push'){
             steps{
-                 withDockerRegistry([ credentialsId: "docker" ]) {                
+                 withDockerRegistry([ url:"https://hub.docker.com/", credentialsId: "docker" ]) {                
                       sh 'docker push $registry:$BUILD_NUMBER'
                   }
-                 withDockerRegistry([ credentialsId: "docker" ]) {                
+                 withDockerRegistry([url:"https://hub.docker.com/", credentialsId: "docker" ]) {                
                       sh 'docker push $registry2:$BUILD_NUMBER'
                   }
             }
