@@ -27,9 +27,11 @@ pipeline {
         }
         stage('push'){
             steps{
-                 withDockerRegistry([ credentialsId: "docker" ]) {                
-                      dockerImage.push()
-                  }
+                script{
+                     withDockerRegistry([ credentialsId: "docker" ]) {                
+                          dockerImage.push()
+                      }
+                      }
             }
         }
         stage('Cleaning up') {
