@@ -18,18 +18,18 @@ pipeline {
         }
         stage('build'){
             steps {
-                sh'''
+                sh"""
                  cd /var/lib/jenkins/workspace/cipipeline/movie-analyst-ui
                  pwd
-                 docker build -t $registry:$BUILD_NUMBER .
+                 docker build -t $registry:${BUILD_NUMBER} .
                  docker images
-                '''
-                sh'''
+                """
+                sh"""
                  cd movie-analyst-api
                  pwd
-                 docker build -t $registry2:$BUILD_NUMBER .
+                 docker build -t $registry2:${BUILD_NUMBER} .
                  docker images
-                '''
+                """
                 sh 'docker images'
             }
         }
