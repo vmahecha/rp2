@@ -19,17 +19,15 @@ pipeline {
             steps {
                 sh "cd /var/lib/jenkins/workspace/cipipeline"
                 sh "cd movie-analyst-ui"
-                script{
-                    dockerImage = docker.build(registry) + ":$BUILD_NUMBER"
-                    }
-                sh "docker images"
+                sh 'docker build -t $registry:$BUILD_NUMBER .'
+                sh 'docker images'
             }
         }
         stage('push'){
             steps{
                 script{
                      withDockerRegistry([ credentialsId: "docker" ]) {                
-                          dockerImage.push()
+                          sh 'docker push $registry:$BUILD_NUMBER'
                       }
                       }
             }
