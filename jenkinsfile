@@ -17,8 +17,7 @@ pipeline {
         }
         stage('build'){
             steps {
-                sh "cd /var/lib/jenkins/workspace/cipipeline"
-                sh "cd movie-analyst-ui"
+                sh "cd /var/lib/jenkins/workspace/cipipeline/movie-analyst-ui"
                 sh 'docker build -t $registry:$BUILD_NUMBER .'
                 sh 'docker images'
             }
